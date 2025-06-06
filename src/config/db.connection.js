@@ -4,7 +4,6 @@ import { envVariables } from "./env.validate.js";
 export const connectDB = async () => {
   try {
     await mongoose.connect(envVariables.MONGO_URI);
-    // console.log(`✅ MongoDB connected: ${conn.connection.host}`);
   } catch (error) {
     console.error("❌ MongoDB connection error:", error.message);
     process.exit(1);
