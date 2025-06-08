@@ -10,7 +10,7 @@ const rolesSchema = new Schema(
       default: STATUS_TYPES.ACTIVE,
       enum: Object.values(STATUS_TYPES),
     },
-    description: { type: String, trim: true },
+    description: { type: String, trim: true, required: true },
     // permissions: {
     //   users: {
     //     add: { type: Boolean, default: false },
@@ -37,8 +37,6 @@ const rolesSchema = new Schema(
     },
     createdBy: { type: Schema.Types.ObjectId, ref: "users" },
     updatedBy: { type: Schema.Types.ObjectId, ref: "users" },
-    deletedBy: { type: Schema.Types.ObjectId, ref: "users" },
-    deletedAt: { type: Date },
   },
   {
     timestamps: true,

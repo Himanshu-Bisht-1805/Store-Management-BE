@@ -1,0 +1,42 @@
+export const responseCode = {
+  OK: 200,
+  CREATED: 201,
+  ACCEPTED: 202,
+  NON_AUTHORITATIVE_INFORMATION: 203,
+  NO_CONTENT: 204,
+  RESET_CONTENT: 205,
+  PARTIAL_CONTENT: 206,
+  MULTI_STATUS: 207,
+  IM_USED: 226,
+  NOT_MODIFIED: 304,  
+  BAD_REQUEST: 400,
+  UNAUTHORIZED: 401,
+  FORBIDDEN: 403,
+  Unprocessable_Entity: 422,
+  NOT_FOUND: 404,
+  METHOD_NOT_ALLOWED: 405,
+  NOT_ACCEPTABLE: 406,
+  CONFLICT: 409,
+  NO_LONGER_AVAILABLE: 410,
+  TOO_MANY_REQUESTS: 429,
+  INTERNAL_SERVER_ERROR: 500,
+  BAD_GATEWAY: 502,
+  SERVICE_UNAVAILABLE: 503,
+  GATEWAY_TIMEOUT: 504,
+  HTTP_VERSION_NOT_SUPPORTED: 505,
+  NOT_EXTENDED: 510,
+};
+
+export const rolesModuleResponseMessage = {
+  ROLE_ADDED_SUCCESSFULLY: "Role added successfully.",
+  ROLE_UPDATED_SUCCESSFULLY: "Role updated successfully.",
+  ROLE_DELETED_SUCCESSFULLY: "Role deleted successfully.",
+  ROLES_FETCHED_SUCCESSFULLY: "Roles fetched successfully.",
+  ROLE_NAME_ALREADY_EXISTS:
+    "Role name already exists. Please choose a different name.",
+  ROLE_NOT_FOUND: "Role not found.",
+
+  ROLE_ADDED_FAILED: "Failed to add role. Please try again later.",
+  ROLE_UPDATE_FAILED: "Failed to update role. Please try again later.",
+  ROLE_DELETE_FAILED: "Failed to delete role. Please try again later.",
+};

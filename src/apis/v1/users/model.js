@@ -41,6 +41,11 @@ const userSchema = new Schema(
       trim: true,
       lowercase: true,
     },
+    password: {
+      type: String,
+      required: true,
+      trim: true,
+    },
     photo: {
       type: String,
       default: null,
@@ -84,7 +89,7 @@ userSchema.index(
 // Regular indexes for common queries and sorting
 userSchema.index({ createdAt: -1 }); // Sort by recent users
 userSchema.index({ status: 1, roleId: 1 }); // Filter by status + roleId
-userSchema.index({ isDeleted: 1, status: 1 }); // Soft delete filter + status
+userSchema.index({ isDeleted: 1 }); // Soft delete filter + status
 
 // Text index for searching across name, username, email
 userSchema.index({

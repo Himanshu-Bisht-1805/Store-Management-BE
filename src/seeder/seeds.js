@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 import { Roles } from "../apis/v1/roles/model.js";
 import { Users } from "../apis/v1/users/model.js";
 import { envVariables } from "../config/env.validate.js";
+import { hashPassword } from "../utils/hashing.js";
 
 async function seed() {
   const {
@@ -13,13 +14,39 @@ async function seed() {
     DEFAULT_USER_GENDER,
     DEFAULT_USER_PHONE,
     DEFAULT_USER_EMAIL,
+    DEFAULT_USERNAME,
+    DEFAULT_PASSWORD,
   } = envVariables;
 
+  const requiredEnvVars = {
+    MONGO_URI,
+    ADMIN_ROLE_ALIAS,
+    DEFAULT_USER_DOB,
+    DEFAULT_USER_NAME,
+    DEFAULT_USER_FATHER_NAME,
+    DEFAULT_USER_GENDER,
+    DEFAULT_USER_PHONE,
+    DEFAULT_USER_EMAIL,
+    DEFAULT_USERNAME,
+    DEFAULT_PASSWORD,
+  };
+
+  const missingKeys = Object.entries(requiredEnvVars)
+    .filter(
+      ([_, value]) => value === undefined || value === null || value === ""
+    )
+    .map(([key]) => key);
+
+  if (missingKeys.length > 0) {
+    console.error("❌ Missing required environment variables:");
+    missingKeys.forEach((key) => console.error(`- ${key}`));
+    throw new Error(
+      "Environment validation failed. Please check your .env file."
+    );
+  }
+
   try {
-    await mongoose.connect(MONGO_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+    await mongoose.connect(MONGO_URI);
     console.log("MongoDB connected");
 
     // 1. Check if admin role exists by alias from env
@@ -28,7 +55,6 @@ async function seed() {
       adminRole = await Roles.create({
         name: "Administrator",
         alias: ADMIN_ROLE_ALIAS,
-        status: "active", // or your STATUS_TYPES.ACTIVE
         description: "Default administrator role with full permissions",
         permissions: {},
       });
@@ -45,10 +71,11 @@ async function seed() {
         : new Date("1990-01-01");
 
       const defaultUser = await Users.create({
-        name: DEFAULT_USER_NAME || "Admin User",
-        username: "",
-        fatherName: DEFAULT_USER_FATHER_NAME || "Father Name",
+        name: DEFAULT_USER_NAME,
+        username: DEFAULT_USERNAME,
+        fatherName: DEFAULT_USER_FATHER_NAME,
         dob: dob,
+        password: await hashPassword(DEFAULT_PASSWORD),
         gender: DEFAULT_USER_GENDER,
         phoneNumber: DEFAULT_USER_PHONE,
         email: DEFAULT_USER_EMAIL,
