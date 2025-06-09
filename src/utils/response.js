@@ -8,7 +8,7 @@ export const responseCode = {
   PARTIAL_CONTENT: 206,
   MULTI_STATUS: 207,
   IM_USED: 226,
-  NOT_MODIFIED: 304,  
+  NOT_MODIFIED: 304,
   BAD_REQUEST: 400,
   UNAUTHORIZED: 401,
   FORBIDDEN: 403,
@@ -25,6 +25,11 @@ export const responseCode = {
   GATEWAY_TIMEOUT: 504,
   HTTP_VERSION_NOT_SUPPORTED: 505,
   NOT_EXTENDED: 510,
+};
+
+export const commonResponseMessage = {
+  INTERNAL_SERVER_ERROR: "Oops!! Something went wrong. Please try again.",
+  BAD_REQUEST: "Bad Request.",
 };
 
 export const rolesModuleResponseMessage = {

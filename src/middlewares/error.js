@@ -1,47 +1,58 @@
 import mongoose from "mongoose";
-import config from "../config/config.js";
-import { logger } from "../config/logger.js";
 import { ApiError } from "../utils/api.error.js";
-import { responseMessage, responseCode } from "../config/response.js";
+import { commonResponseMessage, responseCode } from "../utils/response.js";
+import { envVariables } from "../config/env.validate.js";
+import { logger } from "../config/logger.js";
 
+// Convert any thrown error to ApiError format
 export const errorConverter = (err, req, res, next) => {
   let error = err;
+
+  const isMongooseError = error instanceof mongoose.Error;
+
   if (!(error instanceof ApiError)) {
     const statusCode =
-      error.statusCode || error instanceof mongoose.Error
+      error.statusCode ||
+      (isMongooseError
         ? responseCode.BAD_REQUEST
-        : responseCode.INTERNAL_SERVER_ERROR;
+        : responseCode.INTERNAL_SERVER_ERROR);
     const message =
-      error.message || statusCode === responseCode.BAD_REQUEST
-        ? responseMessage.BAD_REQUEST
-        : responseMessage.INTERNAL_SERVER_ERROR;
+      error.message ||
+      (isMongooseError
+        ? commonResponseMessage.BAD_REQUEST
+        : commonResponseMessage.INTERNAL_SERVER_ERROR);
     error = new ApiError(statusCode, message, false, err.stack);
   }
+
   next(error);
 };
 
-// // eslint-disable-next-line no-unused-vars
-// export const errorHandler = (err, req, res, next) => {
-//   let { statusCode, message } = err;
-//   message = message.replace(/"/g, '');
-//   message = message.charAt(0).toUpperCase() + message.slice(1);
+// Final error handler middleware
+export const errorHandler = (err, req, res, next) => {
+  let {
+    statusCode = responseCode.INTERNAL_SERVER_ERROR,
+    message = commonResponseMessage.INTERNAL_SERVER_ERROR,
+  } = err;
 
-//   if (config.env === 'production' && !err.isOperational) {
-//     statusCode = responseCode.INTERNAL_SERVER_ERROR;
-//     message = responseMessage.INTERNAL_SERVER_ERROR;
-//   }
+  if (typeof message === "string") {
+    message = message.replace(/"/g, "").trim();
+    message = message.charAt(0).toUpperCase() + message.slice(1);
+  }
 
-//   res.locals.errorMessage =
-//     err.message.replace(/"/g, '').charAt(0).toUpperCase() + message.slice(1);
+  if (envVariables.NODE_ENV === "production" && !err.isOperational) {
+    statusCode = responseCode.INTERNAL_SERVER_ERROR;
+    message = commonResponseMessage.INTERNAL_SERVER_ERROR;
+  }
 
-//   const response = {
-//     code: statusCode,
-//     message: statusCode === 500 ? 'Oops! something went wrong' : message,
-//   };
+  const response = {
+    code: statusCode,
+    message: statusCode === 500 ? "Oops! Something went wrong." : message,
+  };
 
-//   if (config.env === 'development') {
-//     logger.error(err);
-//   }
+  // Optional logging
+  if (envVariables.NODE_ENV === "development") {
+    logger.error(err.stack || err);
+  }
 
-//   res.status(statusCode).send(response);
-// };
+  res.status(statusCode).json(response);
+};
