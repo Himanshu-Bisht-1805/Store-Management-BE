@@ -16,13 +16,20 @@ const envSchema = Joi.object({
 
   MONGO_URI: Joi.string().required().label("MONGO_URI"),
 
+  COUNTER_SIGN: Joi.string().required(),
+
+  AUTH_TOKEN_EXPIRE_TIME: Joi.string().required(),
+
   ADMIN_ROLE_ALIAS: Joi.string().required(),
 
   SALT_ROUNDS: Joi.number().min(8).max(12).default(10).required(),
 
   DEFAULT_USER_DOB: Joi.date().required(),
+
   DEFAULT_USER_NAME: Joi.string().required(),
+
   DEFAULT_USERNAME: Joi.string().required(),
+
   DEFAULT_PASSWORD: Joi.string()
     .pattern(
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[.@#$&!])[A-Za-z\d.@#$&!]{8,15}$/
@@ -33,10 +40,13 @@ const envSchema = Joi.object({
         "DEFAULT_PASSWORD must be 8–15 characters long, and contain at least 1 uppercase letter, 1 lowercase letter, 1 number, and 1 special character (.@#$&!).",
     }),
   DEFAULT_USER_FATHER_NAME: Joi.string().required(),
+
   DEFAULT_USER_GENDER: Joi.string()
     .valid(...Object.values(GENDER_TYPES))
     .required(),
+
   DEFAULT_USER_PHONE: Joi.string().required(),
+
   DEFAULT_USER_EMAIL: Joi.string().email().required(),
 }).unknown(); // Allow other vars not explicitly validated
 
@@ -52,6 +62,8 @@ export const envVariables = {
   NODE_ENV: envVars.NODE_ENV,
   PORT: envVars.PORT,
   MONGO_URI: envVars.MONGO_URI,
+  COUNTER_SIGN: envVars.COUNTER_SIGN,
+  AUTH_TOKEN_EXPIRE_TIME: envVars.AUTH_TOKEN_EXPIRE_TIME,
   ADMIN_ROLE_ALIAS: envVars.ADMIN_ROLE_ALIAS,
   SALT_ROUNDS: envVars.SALT_ROUNDS,
   DEFAULT_USER_DOB: envVars.DEFAULT_USER_DOB,

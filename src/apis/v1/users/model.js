@@ -35,11 +35,23 @@ const userSchema = new Schema(
       required: true,
       trim: true,
     },
+    phoneNumberVerified: {
+      type: String,
+      default: false,
+    },
+    whatsappVerified: {
+      type: String,
+      default: false,
+    },
     email: {
       type: String,
       required: true,
       trim: true,
       lowercase: true,
+    },
+    emailVerified: {
+      type: String,
+      default: false,
     },
     password: {
       type: String,

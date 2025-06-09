@@ -13,6 +13,13 @@ app.use(express.json());
 app.use(errorConverter);
 app.use(errorHandler);
 
-app.use("/v1/api", controlHeaders, v1APIRouter);
+app.use(
+  "/v1/api",
+  (req, res, next) => {
+    console.log(1111), next();
+  },
+  controlHeaders,
+  v1APIRouter
+);
 
 export default app;

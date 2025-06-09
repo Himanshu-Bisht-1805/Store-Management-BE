@@ -5,4 +5,4 @@ import { addRoleValidation } from "./joi.js";
 
 export const rolesRouter = Router();
 
-rolesRouter.route("/").post(validateJoi(addRoleValidation), performAddNewRole);
+rolesRouter.route("/").post(performAddNewRole);
