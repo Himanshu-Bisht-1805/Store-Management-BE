@@ -19,3 +19,5 @@ const AuthenticationSchema = new Schema(
 );
 
 export const Authentication = model("authentication", AuthenticationSchema);
+
+
