@@ -1,16 +1,16 @@
-import { envVariables } from "../../../config/env.validate";
-import { asyncHandler } from "../../../utils/common.async.fn";
+import { envVariables } from "../../../config/env.validate.js";
+import { asyncHandler } from "../../../utils/common.async.fn.js";
 import {
   DEVICE_TYPES_ENUM,
   STATUS_TYPES,
-} from "../../../utils/constant.variable";
-import { verifyPassword } from "../../../utils/hashing";
+} from "../../../utils/constant.variable.js";
+import { verifyPassword } from "../../../utils/hashing.js";
 import {
   sendBadRequestResponse,
   sendNotFoundResponse,
-} from "../../../utils/response.fn";
-import { getUserDetails } from "../users/query";
-import { addAuthenticationDetails } from "./query";
+} from "../../../utils/response.fn.js";
+import { getUserDetails } from "../users/query.js";
+import { addAuthenticationDetails } from "./query.js";
 
 export const performLogin = asyncHandler(async (req, res) => {
   let { identifier, password, deviceType, fcmToken } = req.body;

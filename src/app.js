@@ -1,9 +1,10 @@
 import express from "express";
 import cors from "cors";
 import morgan from "morgan";
-import { v1APIRouter } from "./routes/v1/private.js";
+import { apiRouter } from "./routes/v1/private.js";
 import { controlHeaders } from "./middlewares/headers.js";
 import { errorConverter, errorHandler } from "./middlewares/error.js";
+import { pubRouter } from "./routes/v1/public.js";
 
 const app = express();
 
@@ -13,13 +14,7 @@ app.use(express.json());
 app.use(errorConverter);
 app.use(errorHandler);
 
-app.use(
-  "/v1/api",
-  (req, res, next) => {
-    console.log(1111), next();
-  },
-  controlHeaders,
-  v1APIRouter
-);
+app.use("/pub", controlHeaders, pubRouter);
+app.use("/api", controlHeaders, apiRouter);
 
 export default app;

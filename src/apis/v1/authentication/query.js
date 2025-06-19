@@ -1,4 +1,4 @@
-import { Authentication } from "./model";
+import { Authentication } from "./model.js";
 
 export const addAuthenticationDetails = (
   filter,
