@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import { envVariables } from "../config/env.validate";
+import { envVariables } from "../config/env.validate.js";
 
 export const generateAuthToken = async (payload, expiresIn) => {
   try {

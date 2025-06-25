@@ -15,6 +15,6 @@ app.use(errorConverter);
 app.use(errorHandler);
 
 app.use("/pub", controlHeaders, pubRouter);
-app.use("/api", controlHeaders, apiRouter);
+app.use("/v1/api", controlHeaders, apiRouter);
 
 export default app;

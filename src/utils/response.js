@@ -30,6 +30,11 @@ export const responseCode = {
 export const commonResponseMessage = {
   INTERNAL_SERVER_ERROR: "Oops!! Something went wrong. Please try again.",
   BAD_REQUEST: "Bad Request.",
+  INVALID_CREDENTIAL: "Invalid credentials. Please try again.",
+  UNAUTHORIZED_ACCESS:
+    "Unauthorized access. Please log in with valid credentials.",
+  USER_LOGGED_OUT: "User logged out successfully.",
+  USER_LOGGED_OUT_FAILED: "Failed to log out user. Please try again later.",
 };
 
 export const rolesModuleResponseMessage = {
@@ -44,4 +49,25 @@ export const rolesModuleResponseMessage = {
   ROLE_ADDED_FAILED: "Failed to add role. Please try again later.",
   ROLE_UPDATE_FAILED: "Failed to update role. Please try again later.",
   ROLE_DELETE_FAILED: "Failed to delete role. Please try again later.",
+  ROLE_INACTIVE: "User role is inactive. Access is not allowed.",
+};
+
+export const usersModuleResponseMessage = {
+  USER_ADDED_SUCCESSFULLY: "User added successfully.",
+  USER_UPDATED_SUCCESSFULLY: "User updated successfully.",
+  USER_DELETED_SUCCESSFULLY: "User deleted successfully.",
+  USERS_FETCHED_SUCCESSFULLY: "Users fetched successfully.",
+  USER_FETCHED_SUCCESSFULLY: "User fetched successfully.",
+
+  USERNAME_ALREADY_EXISTS:
+    "Username already exists. Please choose a different one.",
+  EMAIL_ALREADY_EXISTS: "Email already exists. Please use a different email.",
+  PHONE_ALREADY_EXISTS:
+    "Phone number already exists. Please use a different number.",
+  USER_NOT_FOUND: "User not found.",
+  ACCOUNT_DISABLED: "User account is disabled. Please contact support.",
+  USER_ADD_FAILED: "Failed to add user. Please try again later.",
+  USER_UPDATE_FAILED: "Failed to update user. Please try again later.",
+  USER_DELETE_FAILED: "Failed to delete user. Please try again later.",
+  USER_FETCH_FAILED: "Failed to fetch user. Please try again later.",
 };

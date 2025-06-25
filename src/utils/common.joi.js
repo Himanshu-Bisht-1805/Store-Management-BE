@@ -1,3 +1,4 @@
+import Joi from "joi";
 import JoiObjectId from "joi-objectid";
 
-const JoiObjectIdExtension = JoiObjectId(Joi);
+export const JoiObjectIdExtension = JoiObjectId(Joi);

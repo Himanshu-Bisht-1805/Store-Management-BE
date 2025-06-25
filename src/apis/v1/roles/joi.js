@@ -9,21 +9,19 @@ const permissionSetSchema = Joi.object({
 });
 
 export const addRoleValidation = {
-  body: {
-    body: Joi.object({
-      name: Joi.string().trim().required().messages({
-        "any.required": "Role name is required.",
-      }),
-      description: Joi.string().required(),
-      permissions: Joi.object()
-        .pattern(
-          Joi.string(), // dynamic key like "users", "roles", etc.
-          permissionSetSchema
-        )
-        .required()
-        .messages({
-          "object.base": "Permissions must be permission sets.",
-        }),
+  body: Joi.object({
+    name: Joi.string().trim().required().messages({
+      "any.required": "Role name is required.",
     }),
-  },
+    description: Joi.string().required(),
+    permissions: Joi.object()
+      .pattern(
+        Joi.string(), // dynamic key like "users", "roles", etc.
+        permissionSetSchema
+      )
+      .required()
+      .messages({
+        "object.base": "Permissions must be permission sets.",
+      }),
+  }),
 };
