@@ -41,3 +41,7 @@ export const formatDescription = (input) => {
       .join(". ") + (input.trim().endsWith(".") ? "." : "")
   );
 };
+
+export function generateOTP() {
+  return Math.floor(100001 + Math.random() * 899899);
+}

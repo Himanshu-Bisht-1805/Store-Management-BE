@@ -52,6 +52,27 @@ export const rolesModuleResponseMessage = {
   ROLE_INACTIVE: "User role is inactive. Access is not allowed.",
 };
 
+export const otpModuleResponseMessage = {
+  // Success messages
+  OTP_SENT_EMAIL_SUCCESSFULLY: "OTP sent successfully to your email.",
+  OTP_SENT_SMS_SUCCESSFULLY: "OTP sent successfully via SMS.",
+  OTP_SENT_WHATSAPP_SUCCESSFULLY: "OTP sent successfully via WhatsApp.",
+
+  // Failure messages
+  OTP_SEND_EMAIL_FAILED: "Failed to send OTP to email. Please try again later.",
+  OTP_SEND_SMS_FAILED: "Failed to send OTP via SMS. Please try again later.",
+  OTP_SEND_WHATSAPP_FAILED:
+    "Failed to send OTP via WhatsApp. Please try again later.",
+
+  // Common OTP flow
+  OTP_VERIFIED_SUCCESSFULLY: "OTP verified successfully.",
+  OTP_VERIFICATION_FAILED:
+    "OTP verification failed. Please check and try again.",
+  OTP_EXPIRED: "OTP has expired. Please request a new one.",
+  OTP_INVALID: "Invalid OTP. Please try again.",
+  OTP_ALREADY_USED: "This OTP has already been used.",
+};
+
 export const usersModuleResponseMessage = {
   USER_ADDED_SUCCESSFULLY: "User added successfully.",
   USER_UPDATED_SUCCESSFULLY: "User updated successfully.",
