@@ -9,7 +9,7 @@ export const addAuthenticationDetails = (
   }
 ) => Authentication.updateOne(filter, toBeUpdate, options);
 
-export const getAddAuthenticationDetails = (filter, projection) =>
+export const getAuthenticationDetails = (filter, projection) =>
   Authentication.findOne(filter, projection);
 
 export const deleteManyAuthenticationDetails = (filter) =>

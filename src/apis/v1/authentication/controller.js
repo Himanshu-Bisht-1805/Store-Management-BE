@@ -20,7 +20,7 @@ import {
 } from "../../../utils/response.js";
 import { addOTPInDB } from "../otps/query.js";
 import { getRoleDetails } from "../roles/query.js";
-import { getUserDetails } from "../users/query.js";
+import { getUserDetails, updateUserDetails } from "../users/query.js";
 import {
   addAuthenticationDetails,
   deleteManyAuthenticationDetails,
@@ -125,6 +125,14 @@ export const performLogin = asyncHandler(async (req, res) => {
 
   await addAuthenticationDetails({ userId }, data);
 
+  if (!emailVerified) {
+    const result = await updateUserDetails(
+      { _id: userId, isDeleted: false },
+      { emailVerified: true }
+    );
+    console.log("Update result:", result);
+  }
+
   return sendOkResponse(res, `Welcome back! ${name}`, {
     authToken,
     user: {
@@ -149,6 +157,8 @@ export const performLogin = asyncHandler(async (req, res) => {
 
 export const performLogOut = asyncHandler(async (req, res) => {
   const { _id: userId } = req.authUser;
+
+  return sendOkResponse(res, "0", { data: req.authUser });
 
   const loggedOut = await deleteManyAuthenticationDetails({
     userId,

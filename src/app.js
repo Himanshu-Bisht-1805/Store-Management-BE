@@ -5,6 +5,7 @@ import { apiRouter } from "./routes/v1/private.js";
 import { controlHeaders } from "./middlewares/headers.js";
 import { errorConverter, errorHandler } from "./middlewares/error.js";
 import { pubRouter } from "./routes/v1/public.js";
+import { authenticate } from "./middlewares/authentication.js";
 
 const app = express();
 
@@ -15,6 +16,6 @@ app.use(errorConverter);
 app.use(errorHandler);
 
 app.use("/pub", controlHeaders, pubRouter);
-app.use("/v1/api", controlHeaders, apiRouter);
+app.use("/v1/api", controlHeaders, authenticate, apiRouter);
 
 export default app;
